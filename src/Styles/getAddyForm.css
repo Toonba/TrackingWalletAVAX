@@ -35,7 +35,15 @@
   background-color: rgb(102, 13, 185);
 }
 
-.result {
+.result,
+.previousBalance {
   text-align: center;
   margin-top: 50px;
+}
+
+.whichRange {
+  display: flex;
+  column-gap: 20px;
+  justify-content: center;
+  margin-bottom: 50px;
 }
