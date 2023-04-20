@@ -2,24 +2,17 @@ import React, { useEffect, useState, useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import Web3 from 'web3'
 import { getBalance, getBlockNumberForDates, getDatesBetween } from '../../Service/web3'
+import { LineChart, Line, CartesianGrid, YAxis, XAxis } from 'recharts'
 
 function GetHistory() {
   // 27639779
   const inputValue = useSelector((state) => state.inputValue)
   const today = new Date()
-  const sevenDay = new Date()
-  const thirtyDay = new Date()
-  const hundredDay = new Date()
-  sevenDay.setDate(today.getDate() - 7)
-  sevenDay.setMilliseconds(today.getMilliseconds() + 10)
-  thirtyDay.setDate(today.getDate() - 30)
-  thirtyDay.setMilliseconds(today.getMilliseconds() + 10)
-  hundredDay.setDate(today.getDate() - 365)
-  hundredDay.setMilliseconds(today.getMilliseconds() + 10)
 
   // const dateToTrack = [sevenDay, thirtyDay, hundredDay]
   const [myData, setMyData] = useState([{ address: inputValue, balance: 0, date: null }])
-  const [selectedOption, setSelectedOption] = useState(7)
+  const [selectedOption, setSelectedOption] = useState(120)
+  const [yAxisDomain, setYAxisDomain] = useState([0, 100])
 
   const targetDay = new Date()
   targetDay.setDate(today.getDate() - selectedOption)
@@ -28,6 +21,11 @@ function GetHistory() {
   const handleSelectChange = (event) => {
     setSelectedOption(event.target.value)
   }
+
+  useEffect(() => {
+    const maxBalance = Math.max(...myData.map((item) => item.balance))
+    setYAxisDomain([0, maxBalance + 10])
+  }, [myData])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,16 +43,25 @@ function GetHistory() {
   return (
     <div className="previousBalance">
       <div className="whichRange">
-        <label for="chooseRange">Which range do you want to check ?</label>
+        <label htmlFor="chooseRange">Which range do you want to check ?</label>
         <select name="range" id="chooseRange" value={selectedOption} onChange={handleSelectChange}>
           <option value="7">7 days</option>
           <option value="30">30 days</option>
           <option value="120">120 days</option>
         </select>
       </div>
-      {myData.map((element, index) => (
+      <div className="chart">
+        <LineChart width={500} height={300} data={myData}>
+          <CartesianGrid horizontal={false} vertical={false} />
+          <XAxis dataKey="date" tick={{ fill: '#FFFFFF' }} tickLine={true} axisLine={true} tickMargin={0} padding={{ left: -15, right: 0 }} />
+
+          <YAxis domain={yAxisDomain} />
+          <Line type="monotone" dataKey="balance" stroke="#8884d8" strokeWidth={2} />
+        </LineChart>
+      </div>
+      {/* {myData.map((element, index) => (
         <p key={`${element}-${index}`}>{`Il était de ${element.balance} AVAX le ${element.date}`}</p>
-      ))}
+      ))} */}
     </div>
   )
 }
