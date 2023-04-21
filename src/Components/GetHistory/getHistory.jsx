@@ -9,23 +9,16 @@ import SelectRange from '../SelectRange/selectRange'
 
 function GetHistory() {
   const inputValue = useSelector((state) => state.inputValue)
-  const data = useSelector((state) => state.data)
   const selectedOption = useSelector((state) => state.selectRangeValue)
+  const data = useSelector((state) => state.data)
   const dispatch = useDispatch()
   const today = new Date()
 
-  // const dateToTrack = [sevenDay, thirtyDay, hundredDay]
   const [myData, setMyData] = useState([{ address: inputValue, balance: 0, date: null }])
-  const [yAxisDomain, setYAxisDomain] = useState([0, 100])
 
   const targetDay = new Date()
   targetDay.setDate(today.getDate() - selectedOption)
   const dateToTrack = getDatesBetween(targetDay, today)
-
-  useEffect(() => {
-    const maxBalance = Math.max(...myData.map((item) => item.balance))
-    setYAxisDomain([0, maxBalance + 10])
-  }, [myData])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,18 +31,18 @@ function GetHistory() {
       dispatch(setDataValue(balances))
     }
     fetchData()
-  }, [inputValue, targetDay])
+  }, [inputValue])
 
   return (
     <div className="previousBalance">
       <SelectRange />
-      <TrackingWalletChart data={myData} yDomain={yAxisDomain} />
+      <TrackingWalletChart data={myData} />
       <div className="chart">
         <LineChart width={800} height={300} data={myData}>
           <CartesianGrid horizontal={false} vertical={false} />
           <XAxis dataKey="date" tick={{ fill: '#FFFFFF' }} tickLine={true} axisLine={true} tickMargin={0} padding={{ left: -15, right: 0 }} />
 
-          <YAxis domain={yAxisDomain} />
+          <YAxis />
           <Line type="monotone" dataKey="balance" stroke="#8884d8" strokeWidth={2} />
         </LineChart>
       </div>

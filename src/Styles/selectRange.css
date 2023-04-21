@@ -1,0 +1,16 @@
+.whichRange {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.whichRange .choix {
+  display: flex;
+  border-radius: 10px;
+  border: 1px solid black;
+}
+
+.whichRange .choix span {
+  padding: 5px 10px;
+  cursor: pointer;
+}
