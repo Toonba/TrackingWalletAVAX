@@ -4,7 +4,7 @@ import Web3 from 'web3'
 const initialState = {
   inputValue: null,
   data: [],
-  selectRangeValue: 30
+  selectRangeValue: 7
 }
 
 export const setInputValue = (value) => ({
