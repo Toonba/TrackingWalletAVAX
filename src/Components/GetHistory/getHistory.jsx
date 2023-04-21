@@ -1,17 +1,27 @@
 import React, { useEffect, useState, useMemo } from 'react'
 import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { setDataValue } from '../../Store/store'
 import Web3 from 'web3'
 import { getBalance, getBlockNumberForDates, getDatesBetween } from '../../Service/web3'
-import { LineChart, Line, CartesianGrid, YAxis, XAxis } from 'recharts'
+import { LineChart, Line, CartesianGrid, YAxis, XAxis, ResponsiveContainer } from 'recharts'
+import TrackingWalletChart from '../Chart/trackingWalletChart'
+import SelectRange from '../SelectRange/selectRange'
 
 function GetHistory() {
-  // 27639779
   const inputValue = useSelector((state) => state.inputValue)
+  const data = useSelector((state) => state.data)
+  const dispatch = useDispatch()
   const today = new Date()
+
+  // const handleSubmit = (event) => {
+  //   event.preventDefault()
+  //   dispatch(setInputValue(address))
+  // }
 
   // const dateToTrack = [sevenDay, thirtyDay, hundredDay]
   const [myData, setMyData] = useState([{ address: inputValue, balance: 0, date: null }])
-  const [selectedOption, setSelectedOption] = useState(120)
+  const [selectedOption, setSelectedOption] = useState(7)
   const [yAxisDomain, setYAxisDomain] = useState([0, 100])
 
   const targetDay = new Date()
@@ -35,23 +45,25 @@ function GetHistory() {
         return { balance: result.balance, date: result.date }
       })
       const balances = await Promise.all(promises)
-      setMyData(balances)
+      dispatch(setDataValue(balances))
     }
     fetchData()
   }, [inputValue, targetDay])
 
   return (
     <div className="previousBalance">
-      <div className="whichRange">
+      <SelectRange />
+      {/* <div className="whichRange">
         <label htmlFor="chooseRange">Which range do you want to check ?</label>
         <select name="range" id="chooseRange" value={selectedOption} onChange={handleSelectChange}>
           <option value="7">7 days</option>
           <option value="30">30 days</option>
-          <option value="120">120 days</option>
+          <option value="360">360 days</option>
         </select>
-      </div>
+      </div> */}
+      <TrackingWalletChart data={myData} yDomain={yAxisDomain} />
       <div className="chart">
-        <LineChart width={500} height={300} data={myData}>
+        <LineChart width={800} height={300} data={myData}>
           <CartesianGrid horizontal={false} vertical={false} />
           <XAxis dataKey="date" tick={{ fill: '#FFFFFF' }} tickLine={true} axisLine={true} tickMargin={0} padding={{ left: -15, right: 0 }} />
 
