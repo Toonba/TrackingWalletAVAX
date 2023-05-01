@@ -5,6 +5,7 @@ header {
   justify-content: center;
   align-items: center;
   background-color: black;
+  font-family: sigmar;
 }
 
 header .logo {

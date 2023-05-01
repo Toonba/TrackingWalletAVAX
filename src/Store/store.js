@@ -1,10 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
-import Web3 from 'web3'
 
 const initialState = {
   inputValue: null,
   data: [],
-  selectRangeValue: 7
+  selectRangeValue: 180
 }
 
 export const setInputValue = (value) => ({

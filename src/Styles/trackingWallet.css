@@ -1,0 +1,36 @@
+.svg{
+  background-color: rgb(226, 96, 96);
+}
+
+.marks path {
+  fill: none;
+  stroke-width: 2px;
+  stroke: black;
+}
+
+.marks line {
+  stroke-width: 1px;
+  stroke: black;
+}
+
+.axis-label {
+  font-size: 16px;
+  text-anchor: middle;
+}
+
+.axis line {
+  stroke-width: 1px;
+  stroke: black;
+}
+
+.axis path {
+  fill: none;
+  stroke-width: 2px;
+  stroke: black;
+}
+
+.axis text {
+  font-size: 12px;
+  text-anchor: end;
+  fill: black;
+}

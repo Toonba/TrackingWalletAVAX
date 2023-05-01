@@ -26,6 +26,12 @@ function diffDays(date1, date2) {
   return diffDays
 }
 
+/**
+ * 
+ * @param {Date} date1 
+ * @param {Date} date2 
+ * @returns {boolean} true if date are matching, false if date arn't matching (only compare Year Month and day)
+ */
 function isDateMatching(date1, date2) {
   if (date1.getDate() === date2.getDate() && date1.getMonth() === date2.getMonth() && date1.getFullYear() === date2.getFullYear()) {
     return true
@@ -34,14 +40,25 @@ function isDateMatching(date1, date2) {
   }
 }
 
+/**
+ * 
+ * @param {Date} date 
+ * @returns {string} date on format JJMMYYY
+ */
 function getDateJJMMYYY(date) {
   const day = date.getDate()
   const month = date.getMonth() + 1
   const year = date.getFullYear()
-  const dateString = day + '/' + month + '/' + year
+  const dateString = month + '/' + day + '/' + year
   return dateString
 }
 
+/**
+ * 
+ * @param {Date} startDate latest date
+ * @param {Date} endDate earliest date 
+ * @returns {array} each date between the latest date and the earliest
+ */
 export function getDatesBetween(startDate, endDate) {
   const dates = []
   let currentDate = new Date(startDate)
@@ -54,6 +71,12 @@ export function getDatesBetween(startDate, endDate) {
   return dates
 }
 
+/**
+ * 
+ * @param {string} inputValue Wallet address given by user
+ * @param {number} blockNumber block number 
+ * @returns {object} address from user's input, balance of this wallet (if no block specified give current balance), date of the specified block current date if block number not specified 
+ */
 export async function getBalance(inputValue, blockNumber = null) {
   //0xA22BCe5a3CB160399bD30E74D5e8B16D3C0c2d6B
   if (blockNumber === null) {
@@ -67,11 +90,16 @@ export async function getBalance(inputValue, blockNumber = null) {
   return { address: address, balance: balance, date: getDateJJMMYYY(blockDate) }
 }
 
+/**
+ * 
+ * @param {Date} targetDate 
+ * @returns {number} block number of one block minted at target date 
+ */
 export async function getBlockNumberForDates(targetDate) {
   const today = new Date()
   const diffDaysValue = diffDays(today, targetDate)
   const latestBlockNumber = await web3.eth.getBlockNumber()
-  // 43000 is approximately the number of block there is each day it allow to be closer of the result from start
+  // 43000 is approximately the number of block there is each day (for avalanche) it allow to be closer of the result from start
   const supposedBlockNumberAtTargetDate = latestBlockNumber - diffDaysValue * 43000
   const block = await web3.eth.getBlock(supposedBlockNumberAtTargetDate)
   const blockDate = new Date(block.timestamp * 1000)

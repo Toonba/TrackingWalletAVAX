@@ -14,7 +14,7 @@ function GetHistory() {
   const dispatch = useDispatch()
   const today = new Date()
 
-  const [myData, setMyData] = useState([{ address: inputValue, balance: 0, date: null }])
+  // const [myData, setMyData] = useState([{ address: inputValue, balance: 0, date: null }])
 
   const targetDay = new Date()
   targetDay.setDate(today.getDate() - selectedOption)
@@ -36,19 +36,7 @@ function GetHistory() {
   return (
     <div className="previousBalance">
       <SelectRange />
-      <TrackingWalletChart data={myData} />
-      <div className="chart">
-        <LineChart width={800} height={300} data={myData}>
-          <CartesianGrid horizontal={false} vertical={false} />
-          <XAxis dataKey="date" tick={{ fill: '#FFFFFF' }} tickLine={true} axisLine={true} tickMargin={0} padding={{ left: -15, right: 0 }} />
-
-          <YAxis />
-          <Line type="monotone" dataKey="balance" stroke="#8884d8" strokeWidth={2} />
-        </LineChart>
-      </div>
-      {/* {myData.map((element, index) => (
-        <p key={`${element}-${index}`}>{`Il était de ${element.balance} AVAX le ${element.date}`}</p>
-      ))} */}
+      {data.length ===0 ? null : <TrackingWalletChart dataWallet={data}/>}
     </div>
   )
 }

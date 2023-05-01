@@ -1,0 +1,18 @@
+
+.homeSection {
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 95vh
+}
+.homeSection h1{ 
+  font-family: sigmar;
+  color: white;
+  text-align:center;
+  font-size: 9vw;
+  margin:0
+}
+.avax{
+  color: rgb(148, 9, 9);
+}
