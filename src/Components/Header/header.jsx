@@ -8,7 +8,7 @@ function Header() {
   return (
     <header>
       <nav>
-        <Link to="/tracking-wallet">Wallet Tracking</Link>
+        <Link to="/TrackingWalletAVAX">Wallet Tracking</Link>
         <Link to="/redacted">[REDACTED]</Link>
         <Link to="/redacted">[REDACTED]</Link>
         <Link to="/redacted">[REDACTED]</Link>

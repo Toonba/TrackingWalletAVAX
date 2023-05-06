@@ -16,7 +16,7 @@ root.render(
         <Header />
         <Routes>
           <Route exact path="/" element={<Home />}></Route>
-          <Route path="/tracking-wallet" element={<TrackingWallet />}></Route>
+          <Route path="/TrackingWalletAVAX" element={<TrackingWallet />}></Route>
           <Route path="/redacted" element={<Redacted />}></Route>
         </Routes>
       </Router>

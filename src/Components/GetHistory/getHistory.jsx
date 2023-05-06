@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { setDataValue } from '../../Store/store'
 import { getBalance, getBlockNumberForDates, getDatesBetween } from '../../Service/web3'
-import { LineChart, Line, CartesianGrid, YAxis, XAxis, ResponsiveContainer } from 'recharts'
 import TrackingWalletChart from '../Chart/trackingWalletChart'
 import SelectRange from '../SelectRange/selectRange'
+import '../../Styles/getHistory.css'
 
 function GetHistory() {
   const inputValue = useSelector((state) => state.inputValue)
@@ -31,13 +31,13 @@ function GetHistory() {
       dispatch(setDataValue(balances))
     }
     fetchData()
-  }, [inputValue])
+  }, [inputValue, selectedOption])
 
   return (
-    <div className="previousBalance">
+    <section className="previousBalance">
       <SelectRange />
-      {data.length ===0 ? null : <TrackingWalletChart dataWallet={data}/>}
-    </div>
+      {inputValue === null ? null : <TrackingWalletChart dataWallet={data} />}
+    </section>
   )
 }
 

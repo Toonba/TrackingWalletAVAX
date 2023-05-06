@@ -42,21 +42,7 @@
   background-color: rgb(144, 46, 46);
 }
 
-.result,
-.previousBalance {
+.result {
   text-align: center;
   margin-top: 50px;
-}
-
-.whichRange {
-  display: flex;
-  column-gap: 20px;
-  justify-content: center;
-  margin-bottom: 50px;
-}
-
-.chart {
-  display: flex;
-  justify-content: center;
-  width: 90%;
 }

@@ -3,7 +3,7 @@ import { configureStore } from '@reduxjs/toolkit'
 const initialState = {
   inputValue: null,
   data: [],
-  selectRangeValue: 180
+  selectRangeValue: 7
 }
 
 export const setInputValue = (value) => ({
@@ -28,7 +28,7 @@ const reducer = (state = initialState, action) => {
     case 'setDataValue':
       return {
         ...state,
-        data: [...state.data, action.payload]
+        data: action.payload
       }
     case 'setSelectRangeValue':
       return { ...state, selectRangeValue: action.payload }

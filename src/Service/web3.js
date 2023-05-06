@@ -27,9 +27,9 @@ function diffDays(date1, date2) {
 }
 
 /**
- * 
- * @param {Date} date1 
- * @param {Date} date2 
+ *
+ * @param {Date} date1
+ * @param {Date} date2
  * @returns {boolean} true if date are matching, false if date arn't matching (only compare Year Month and day)
  */
 function isDateMatching(date1, date2) {
@@ -41,8 +41,8 @@ function isDateMatching(date1, date2) {
 }
 
 /**
- * 
- * @param {Date} date 
+ *
+ * @param {Date} date
  * @returns {string} date on format JJMMYYY
  */
 function getDateJJMMYYY(date) {
@@ -54,9 +54,9 @@ function getDateJJMMYYY(date) {
 }
 
 /**
- * 
+ *
  * @param {Date} startDate latest date
- * @param {Date} endDate earliest date 
+ * @param {Date} endDate earliest date
  * @returns {array} each date between the latest date and the earliest
  */
 export function getDatesBetween(startDate, endDate) {
@@ -72,10 +72,10 @@ export function getDatesBetween(startDate, endDate) {
 }
 
 /**
- * 
+ *
  * @param {string} inputValue Wallet address given by user
- * @param {number} blockNumber block number 
- * @returns {object} address from user's input, balance of this wallet (if no block specified give current balance), date of the specified block current date if block number not specified 
+ * @param {number} blockNumber block number
+ * @returns {object} address from user's input, balance of this wallet (if no block specified give current balance), date of the specified block current date if block number not specified
  */
 export async function getBalance(inputValue, blockNumber = null) {
   //0xA22BCe5a3CB160399bD30E74D5e8B16D3C0c2d6B
@@ -91,9 +91,9 @@ export async function getBalance(inputValue, blockNumber = null) {
 }
 
 /**
- * 
- * @param {Date} targetDate 
- * @returns {number} block number of one block minted at target date 
+ *
+ * @param {Date} targetDate
+ * @returns {number} block number of one block minted at target date
  */
 export async function getBlockNumberForDates(targetDate) {
   const today = new Date()
@@ -130,4 +130,3 @@ export async function getBlockNumberForDates(targetDate) {
     return blockNumber
   }
 }
-

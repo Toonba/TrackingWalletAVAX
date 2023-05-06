@@ -1,0 +1,25 @@
+.previousBalance {
+  text-align: center;
+  margin-top: 0;
+  background-color: black;
+  min-height: 70vh;
+}
+
+.whichRange {
+  display: flex;
+  column-gap: 20px;
+  justify-content: center;
+  margin-bottom: 50px;
+  color: white;
+}
+
+.whichRange span {
+  padding: 5px 10px;
+  border-radius: 20px;
+ cursor: pointer;;
+}
+
+.whichRange span:hover, .whichRange .active {
+  background-color: brown;
+}
+
