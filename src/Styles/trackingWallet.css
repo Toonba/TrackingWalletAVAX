@@ -4,7 +4,7 @@
 
 .marks line {
   stroke-width: 1px;
-  stroke: black;
+  stroke: #292929;
 }
 
 .axis-label {
@@ -12,9 +12,8 @@
   text-anchor: middle;
 }
 
-
 .axis text {
   font-size: 12px;
   text-anchor: end;
-  fill: black;
+  fill: #292929;
 }
